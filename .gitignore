@@ -1,0 +1,9 @@
+node_modules/
+*.tgz
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+.paseo/
+**/api_keys.local.json
