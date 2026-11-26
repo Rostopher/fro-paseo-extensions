@@ -9,13 +9,19 @@
 | 插件 | 用途 | 声明支持的 Paseo 版本 | 客户端 |
 | --- | --- | --- | --- |
 | [Coding Quota](https://github.com/frowang-ai/paseo-coding-quota) | 在 Paseo 额度界面及详细面板中查看 Kimi、GLM、Codex 和 Command Code 的账户用量 | `>=0.11.0` | 桌面、网页、移动端 |
-| [Link Menu](https://github.com/frowang-ai/paseo-link-menu) | 右键聊天中的链接，复制实际网址或文件路径 | `>=0.10.1` | 桌面、网页 |
+| [Link Menu](https://github.com/frowang-ai/paseo-link-menu) | 右键聊天链接，复制实际地址或在桌面文件管理器中定位本地文件 | `>=0.10.1` | 桌面；网页支持复制 |
 | [Quote](https://github.com/frowang-ai/paseo-quote) | 引用选中的聊天文字、针对段落回复，或开启侧边对话 | `>=0.10.1` | 桌面、网页 |
 | [VSCode Icons](https://github.com/Rostopher/paseo-vscode-icons) | 为 Paseo 原有文件浏览器添加文件和文件夹图标 | `>=0.11.0` | 桌面、网页 |
-| [Windows File Link Fix](https://github.com/frowang-ai/paseo-windows-file-links) | 修复 `/C:/project/report.html` 这类盘符前多一个斜杠的 Markdown 文件链接 | `>=0.13.2 <0.14.0` | 使用跨平台组件；移动端尚未验证 |
+| [Windows File Link Fix](https://github.com/frowang-ai/paseo-windows-file-links) | 修复盘符前多一个斜杠的 Markdown 文件链接，并复制修正后单条回复的完整 Markdown | `>=0.13.2` | 使用跨平台组件；移动端尚未验证 |
 | [Document Viewer](https://github.com/frowang-ai/paseo-document-viewer) | 在工作区标签页中查看本地 HTML 和 PDF | `>=0.11.2 <0.13.0` | 桌面、网页 |
 
-以上版本范围于 **2026-10-28** 根据已发布的插件清单核对，表示安装要求，不代表范围内每个 Paseo 版本都经过实测。**Document Viewer 目前不支持 Paseo 0.13 及以上版本。** 最新兼容性和限制请以各插件 README 为准。
+以上版本范围于 **2026-11-26** 根据已发布的插件清单核对，表示安装要求，不代表范围内每个 Paseo 版本都经过实测。**Document Viewer 目前不支持 Paseo 0.13 及以上版本。** 最新兼容性和限制请以各插件 README 为准。
+
+## Link Menu 效果预览
+
+![Link Menu：复制链接地址、在资源管理器中显示](https://raw.githubusercontent.com/frowang-ai/paseo-link-menu/main/docs/images/link-menu-zh-CN.png)
+
+0.2.2 版本新增本地文件定位、菜单准备提速，以及连接多个主机时共享一个菜单。图中运行真实插件菜单，聊天内容和桌面接口使用演示数据。使用方法和验证边界见[中文说明](https://github.com/frowang-ai/paseo-link-menu/blob/main/README.zh-CN.md)或[英文说明](https://github.com/frowang-ai/paseo-link-menu#preview)。
 
 ## 安装
 
@@ -44,7 +50,8 @@ paseo plugin enable link-menu
 ## 配置与兼容性说明
 
 - **Coding Quota：**在插件设置中配置账户。Codex 使用本机已有的 Codex CLI 登录凭据；其他服务使用各自的账户 API key。配置方式和凭据存储说明见插件 README。
-- **Windows File Link Fix：**适用于 Windows daemon。正常的 WSL 路径，如 `/mnt/c/...` 和 `/home/...`，保持不变。插件不转换 Windows 与 WSL 路径，也不检测 daemon 的操作系统。安装需要 npm。
+- **Link Menu：**文件定位需要 Paseo 桌面端的文件管理器接口，且工作区属于该桌面的本机主机。已在 Windows / Paseo 0.16.2 上验证。网页端保留复制功能；不支持远程文件、网络共享或 WSL 到 Windows 的路径转换。
+- **Windows File Link Fix：**适用于 Windows daemon。修正后的已完成回复提供**复制此条回复**按钮，复制该条消息的完整 Markdown。正常的 WSL 路径，如 `/mnt/c/...` 和 `/home/...`，保持不变。插件不转换 Windows 与 WSL 路径，也不检测 daemon 的操作系统。安装需要 npm。
 - **Document Viewer：**这个兼容分支面向 Paseo 0.11.2–0.12.x，daemon 主机需要 Node.js 22.22 或更新版本及 npm。安装时会准备 PDF 引擎；原生 iOS、Android 客户端不提供文档预览。
 - **Link Menu、Quote 和 VSCode Icons：**依赖桌面、网页客户端的界面结构。原生移动端没有这些功能，Paseo 后续调整界面时可能需要更新插件。
 
